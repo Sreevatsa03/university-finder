@@ -60,7 +60,7 @@ create table review (
     and 5
   ),
   description varchar(1000),
-  author varchar(30) not null,
+  author varchar(30),
   university varchar(6) not null,
   foreign key (university) references university(federal_school_code) -- define relationship - university "has" review
   on update cascade on delete cascade
@@ -73,13 +73,10 @@ create table department (
   foreign key (university) references university(federal_school_code) -- define relationship - university "has" department
   on update cascade on delete cascade
 );
-create table sponsor (
-  sponsor_id int auto_increment not null primary key,
+create table club (
+  club_id int auto_increment not null primary key,
   name varchar(30) not null,
-  amount_donated int not null check (
-    amount_donated between 0
-    and 1000000000
-  ),
+  type varchar(30),
   university varchar(6) not null,
   foreign key (university) references university(federal_school_code) -- define relationship - sponsor "donates to" university
   on update cascade on delete cascade

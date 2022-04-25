@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '/Users/sree/First2/CS3200/project/universities_access_db.ui'
+# Form implementation generated from reading ui file '/Users/sree/First2/CS3200/project/ui_files/universities_access_db.ui'
 #
 # Created by: PyQt6 UI code generator 6.3.0
 #
@@ -57,9 +57,12 @@ class Ui_MainWindow(object):
         self.username_label_2.setFont(font)
         self.username_label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.username_label_2.setObjectName("username_label_2")
+        self.shutdown_db_button = QtWidgets.QPushButton(self.centralwidget)
+        self.shutdown_db_button.setGeometry(QtCore.QRect(350, 260, 151, 31))
+        self.shutdown_db_button.setObjectName("shutdown_db_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 508, 24))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 508, 37))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -76,3 +79,4 @@ class Ui_MainWindow(object):
         self.password_label.setText(_translate("MainWindow", "Password:"))
         self.access_db_button.setText(_translate("MainWindow", "Access Database"))
         self.username_label_2.setText(_translate("MainWindow", "University Finder"))
+        self.shutdown_db_button.setText(_translate("MainWindow", "Shutdown Database"))

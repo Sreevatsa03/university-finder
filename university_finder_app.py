@@ -13,7 +13,7 @@ from dbutils import DBUtils
 
 class UniversityFinder():
     
-    def __init__(self, username, password):
+    def __init__(self):
         self.db = DBUtils()
 
     def authenticate(self, user, password, database="universities", host="localhost"):
@@ -22,21 +22,21 @@ class UniversityFinder():
     def shutdown(self):
         self.db.close()
 
-def main():
+# def main():
     # open user interface
     # app = QtWidgets.QApplication(sys.argv)
     # window = UniversityFinderUI()
     # window.show()
 
     # initialize object to utilize database
-    university_finder = UniversityFinder()
-    university_finder.authenticate("root", "MySQLSnukala03#")
-    university_finder.shutdown()
+    # university_finder = UniversityFinder()
+    # university_finder.authenticate("root", "MySQLSnukala03#")
+    # university_finder.shutdown()
 
     # close system
     # sys.exit(app.exec_())
 
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
