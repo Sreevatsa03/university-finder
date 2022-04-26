@@ -10,6 +10,9 @@ AccessWindow, QtBaseClass = uic.loadUiType(ui_1)
 ui_2 = "ui_files/search_or_watchlist.ui"
 Search_WatchlistWindow, QtBaseClass = uic.loadUiType(ui_2)
 
+ui_3 = "ui_files/search.ui"
+SearchWindow, QtBaseClass = uic.loadUiType(ui_3)
+
 
 class AccessDB(QMainWindow, AccessWindow):
 
@@ -34,7 +37,7 @@ class AccessDB(QMainWindow, AccessWindow):
         self.university_finder.authenticate(user, password)
 
         # open new window
-        self.search_or_watchlist = Search_or_Watchlist(self.university_finder)
+        self.search_or_watchlist = SearchorWatchlist(self.university_finder)
         self.search_or_watchlist.show()
         self.close()
 
@@ -45,7 +48,7 @@ class AccessDB(QMainWindow, AccessWindow):
         self.close()
 
 
-class Search_or_Watchlist(QMainWindow, Search_WatchlistWindow):
+class SearchorWatchlist(QMainWindow, Search_WatchlistWindow):
 
     def __init__(self, university_finder):
         QMainWindow.__init__(self)
@@ -65,14 +68,18 @@ class Search_or_Watchlist(QMainWindow, Search_WatchlistWindow):
 
         # get df of results from query
         df = self.university_finder.show_universities()
-        # print(df)
 
         # view dataframe
         self.model = pandasModel(df)
         self.view = QTableView()
         self.view.setModel(self.model)
-        self.view.resize(800, 600)
+        self.view.resize(800, 500)
         self.view.show()
+
+        # change windows to search window
+        self.search = Search(self.university_finder, self.model, self.view)
+        self.search.show()
+        self.close()
 
     def access_watchlist(self):
         pass
@@ -81,6 +88,107 @@ class Search_or_Watchlist(QMainWindow, Search_WatchlistWindow):
         """ Shutdown db and close application """
 
         self.university_finder.shutdown()
+        self.view.close()
+        self.close()
+
+
+class Search(QMainWindow, SearchWindow):
+
+    def __init__(self, university_finder, pandasModel, tableView):
+        QMainWindow.__init__(self)
+        SearchWindow.__init__(self)
+        self.setupUi(self)
+
+        # initialize object to utilize database
+        self.university_finder = university_finder
+
+        # initialize pandasModel and tableView
+        self.model = pandasModel
+        self.view = tableView
+
+        # run functions
+        # self.filter_uni_button.clicked.connect(self.filter_universities)
+        # self.search_name_button.clicked.connect(self.search_universities_by_name)
+        # self.search_code_button.clicked.connect(self.search_universities_by_code)
+        # self.search_loc_button.clicked.connect(self.search_locations)
+        # self.search_review_button.clicked.connect(self.search_reviews)
+        self.view_club_button.clicked.connect(self.view_clubs)
+        self.view_alumn_button.clicked.connect(self.view_alumni)
+        self.view_dep_button.clicked.connect(self.view_departments)
+        self.back_button.clicked.connect(self.go_back)
+        self.shutdown_db_button.clicked.connect(self.exit_app)
+
+    def filter_universities(self):
+        """ filter -> done filtering button on filter windwow -> new window with text box of what universities to add to list """
+        pass
+
+    def search_universities_by_name(self):
+        pass
+
+    def search_universities_by_code(self):
+        pass
+
+    def search_locations(self):
+        pass
+    
+    def search_reviews(self):
+        pass
+
+    def view_clubs(self):
+        """ View all clubs """
+
+        # get df of results from query
+        df = self.university_finder.view_clubs()
+
+        # view dataframe
+        self.clubs_model = pandasModel(df)
+        self.clubs_view = QTableView()
+        self.clubs_view.setModel(self.clubs_model)
+        self.clubs_view.resize(500, 300)
+        self.clubs_view.show()
+
+    def view_alumni(self):
+        """ View all notable alumni """
+
+        # get df of results from query
+        df = self.university_finder.view_notable_alumni()
+
+        # view dataframe
+        self.alumni_model = pandasModel(df)
+        self.alumni_view = QTableView()
+        self.alumni_view.setModel(self.alumni_model)
+        self.alumni_view.resize(500, 300)
+        self.alumni_view.show()
+
+    def view_departments(self):
+        """ View all departments """
+
+        # get df of results from query
+        df = self.university_finder.view_departments()
+
+        # view dataframe
+        self.deps_model = pandasModel(df)
+        self.deps_view = QTableView()
+        self.deps_view.setModel(self.deps_model)
+        self.deps_view.resize(500, 300)
+        self.deps_view.show()
+
+    def go_back(self):
+        """ Go to previous window """
+
+        # close table view
+        self.view.close()
+
+        # open previous window obj
+        self.search_or_watchlist = SearchorWatchlist(self.university_finder)
+        self.search_or_watchlist.show()
+        self.close()
+
+    def exit_app(self):
+        """ Shutdown db and close application """
+
+        self.university_finder.shutdown()
+        self.view.close()
         self.close()
 
 

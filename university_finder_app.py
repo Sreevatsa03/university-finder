@@ -34,3 +34,58 @@ class UniversityFinder():
             """
 
         return self.db.execute(query)
+
+    def search_universities_by_name(self, name):
+        """ Search university by name """
+
+        query = f"""
+            call search_by_name('{name}')
+            """
+
+        return self.db.execute(query)
+
+    def search_universities_by_code(self, code):
+        """ Search university by federal school code """
+
+        query = f"""
+            call search_by_federal_school_code('{code}')
+            """
+
+        return self.db.execute(query)
+
+    def view_clubs(self):
+        """ View all clubs """
+
+        query = f"""
+            select c.name as club_name, c.type, u.name as university_name 
+            from club as c
+	        join university as u
+		    on c.university = u.federal_school_code
+            order by university_name;
+            """
+
+        return self.db.execute(query)
+
+    def view_notable_alumni(self):
+        """ View all notable alumni """
+
+        query = f"""
+            select n.first_name, n.last_name, n.occupation, n.est_net_worth, n.graduating_class, u.name as university_name from notable_alum as n
+	        join university as u
+		    on n.university = u.federal_school_code
+	        order by university_name;
+            """
+
+        return self.db.execute(query)
+
+    def view_departments(self):
+        """ View all departments """
+
+        query = f"""
+            select d.name, d.num_students, u.name as university_name from department as d
+	        join university as u
+		    on d.university = u.federal_school_code
+	        order by university_name;
+            """
+
+        return self.db.execute(query)
