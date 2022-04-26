@@ -67,7 +67,7 @@ create table review (
 );
 create table department (
   department_id int auto_increment not null primary key,
-  name varchar(30) not null,
+  name varchar(60) not null,
   num_students int,
   university varchar(6) not null,
   foreign key (university) references university(federal_school_code) -- define relationship - university "has" department
@@ -75,19 +75,19 @@ create table department (
 );
 create table club (
   club_id int auto_increment not null primary key,
-  name varchar(30) not null,
+  name varchar(60) not null,
   type varchar(30),
   university varchar(6) not null,
   foreign key (university) references university(federal_school_code) -- define relationship - sponsor "donates to" university
   on update cascade on delete cascade
 );
-create table notable_alumn (
+create table notable_alum (
   first_name varchar(30) not null,
   last_name varchar(30) not null,
   occupation varchar(30) not null,
-  est_net_worth int not null check (
+  est_net_worth bigint not null check (
     est_net_worth between 0
-    and 1000000000
+    and 1000000000000
   ),
   graduating_class year not null,
   university varchar(6) not null,
@@ -97,7 +97,7 @@ create table notable_alumn (
 );
 create table watchlisted_university (
   federal_school_code varchar(6) not null primary key,
-  name varchar(30) not null,
+  name varchar(60) not null,
   ranking int not null,
   notes varchar(1000),
   avg_star_rating float,

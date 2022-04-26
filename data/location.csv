@@ -1,0 +1,17 @@
+state,city,population,political_standing,climate_description
+NJ,Princeton,31000,democratic,summer: 59-85 F; winter: 21-50 F
+NY,New York,8419000,democratic,summer: 64-86 F; winter: 27-45 F
+MA,Cambridge,116632,democratic,summer: 55-83 F; winter: 16-40 F
+CT,New Haven,130331,democratic,summer: 69-86 F; winter: 24-43 F
+CA,Stanford,16326,democratic,summer: 53-79 F; winter: 38-61 F
+IL,Chicago,2710000,democratic,summer: 60-84 F; winter: 18-37 F
+PA,Philadelphia,1579000,democratic,summer: 67-89 F; winter: 28-46 F
+CA,Pasadena,141258,democratic,summer: 58-91 F; winter: 46-70 F
+NC,Durham,269702,democratic,summer: 63-89 F; winter: 27-54 F
+MD,Baltimore,609032,democratic,summer: 68-89 F; winter: 29-47 F
+IL,Evanston,74587,democratic,summer: 59-83 F; winter: 15-36 F
+NH,Hanover,8508,democratic,summer: 54-83 F; winter: 10-33 F
+RI,Providence,179494,democratic,summer: 67-83 F; winter: 26-44 F
+TN,Nashville,692587,democratic,summer: 70-90 F; winter: 29-51 F
+MO,St. Louis,308174,democratic,summer: 71-90 F; winter: 23-44 F
+CA,Los Angeles,3967000,democratic,summer: 65-85 F; winter: 49-68 F

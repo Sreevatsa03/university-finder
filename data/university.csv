@@ -1,0 +1,21 @@
+federal_school_code,name,application_fee,has_early_application,tuition,avg_aid_awarded,avg_SAT,top_major,ranking,student_body_size,campus_size,is_public,acceptance_rate,state,city
+002627,Princeton University,70,1,56010,61928,1505,computer science,1,5321,600,0,5.6,NJ,Princeton
+002707,Columbia University,85,1,61671,62850,1505,economics,2,6170,36,0,6.7,NY,New York
+E00468,Harvard University,75,1,54002,62403,1520,political science and governmnet,2,5222,5076,0,5,MA,Cambridge
+002178,Massachusetts Institute of Technology,75,1,53450,45146,1535,computer science,2,4361,168,0,6.7,MA,Cambridge
+001426,Yale University,80,1,57700,60593,1510,economics,5,4703,260,0,6.5,CT,New Haven
+001305,Stanford University,90,1,56169,63013,1505,computer science,6,6366,8180,0,5.2,CA,Stanford
+001774,University of Chicago,75,1,60552,55489,1520,economics,6,6800,217,0,7.3,IL,Chicago
+003378,University of Pennsylvania,75,1,60042,56095,1500,finance,8,9872,299,0,9,PA,Philadelphia
+001131,California Institute of Technology,75,1,56862,51242,1545,computer science,9,901,124,0,6.7,CA,Pasadena
+002920,Duke University,85,1,57633,51332,1510,computer science,9,6717,8693,0,7.7,NC,Durham
+E00473,Johns Hopkins University,70,1,54160,48179,1505,public health,9,6331,140,0,11.1,MD,Baltimore
+001739,Northwestern University,75,1,58701,54167,1495,economics,9,8194,231,0,9.3,IL,Evanston
+002573,Dartmouth College,80,1,60117,55163,1500,economics,13,4170,237,0,9.2,NH,Hanover
+003401,Brown University,75,1,60696,54823,1485,computer science,14,6792,146,0,7.7,RI,Providence
+003535,Vanderbilt University,50,1,54158,53944,1505,economics,14,7057,333,0,11.6,TN,Nashville
+002520,Washington University,75,1,57386,54138,1520,computer science,14,7653,169,0,16,MO,St. Louis
+002711,Cornell University,80,1,59282,47547,1480,biology,17,14743,2300,0,10.7,NY,Ithaca
+003604,Rice University,75,1,51107,49152,1500,information science,17,4076,300,0,10.9,TX,Houston
+001840,University of Notre Dame,75,1,57699,47029,1475,finance,19,8874,1265,0,19,IN,Notre Dame
+001315,University of California - Los Angeles,70,0,43003,18808,1405,psychology,20,31636,419,1,14.3,CA,Los Angeles

@@ -1,0 +1,61 @@
+department_id,name,num_students,university
+1,Forbes College,500,002627
+2,Mathey College,800,002627
+3,Butler College,500,002627
+4,Barnard College,2573,002707
+5,School of International and Public Affairs,1033,002707
+6,College of Dental Medicine,320,002707
+7,Business,4616,E00468
+8,Dental,255,E00468
+9,Law ,2001,E00468
+10,School of Engineering,90,002178
+11,Sloan School of Management,116,002178
+12,School of Architecture and Planning,150,002178
+13,Davenport College,477,001426
+14,Benjamin Franklin College,6200,001426
+15,Jonathan Edwards College,1720,001426
+16,"School of Earth, Energy & Environmental Sciences",560,001305
+17,School of Engineering,1539,001305
+18,School of Medicine,482,001305
+19,Booth School of Business,3500,001774
+20,Divinity School,230,001774
+21,Harris School of Public Policy,839,001774
+22,School of Arts and Sciences,6200,003378
+23,Wharton School,4962,003378
+24,Annenberg School for Communication,80,003378
+25,Division of Biology and Biological Engineering,56,001131
+26,Division of Chemistry and Chemical Engineering,53,001131
+27,Division of Engineering and Applied Science,445,001131
+28,Divinity School,543,002920
+29,Pratt School of Engineering,1257,002920
+30,Fuqua School of Business,1713,002920
+31,Zanvyl Krieger School of Arts & Sciences,2790,E00473
+32,School of Medicine,1417,E00473
+33,Bloomberg School of Public Health,2056,E00473
+34,Weinberg College of Arts of Sciences,5000,001739
+35,School of Communication,1399,001739
+36,School of Education & Social Policy,500,001739
+37,Geisel School of Medicine,734,002573
+38,Thayer School of Engineering,240,002573
+39,Tuck School of Business,560,002573
+40,School of Engineering,453,003401
+41,School of Public Health,410,003401
+42,Warren Alpert Medical School,466,003401
+43,College of Arts and Science,4238,003535
+44,Divinity School,247,003535
+45,School of Engineering,1301,003535
+46,McKelvey School of Engineering,1421,002520
+47,Olin Business School,1698,002520
+48,Sam Fox School of Design & Visual Arts,800,002520
+49,College of Agriculture and Life Sciences,3100,002711
+50,SC Johnson College of Business,3191,002711
+51,College of Engineering,5265,002711
+52,Schools of Architecture,200,003604
+53,George R. Brown School of Engineering,1466,003604
+54,Jones School of Business,472,003604
+55,School of Architecture,200,001840
+56,Mendoza College of Business,2535,001840
+57,College of Arts and Letters,2500,001840
+58,School of Dentistry,376,001315
+59,School of Education and Information Studies,250,001315
+60,Henry Samueli School of Engineering,6161,001315
