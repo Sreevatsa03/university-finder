@@ -15,7 +15,7 @@ create table location (
 );
 create table university (
   federal_school_code varchar(6) not null primary key,
-  name varchar(30) not null,
+  name varchar(60) not null,
   application_fee int check (
     application_fee between 0
     and 1000

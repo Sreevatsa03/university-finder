@@ -1,4 +1,5 @@
-import pymysql
+# import pymysql
+import mysql.connector
 import pandas as pd
 
 
@@ -20,18 +21,16 @@ class ConnectionFactory:
     def get_connection(user, password, database, host):
         if ConnectionFactory.active_connections < ConnectionFactory.max_connections:
             try:
-                con = pymysql.connect(
+                con = mysql.connector.connect(
                     host=host,
                     user=user,
                     password=password,
-                    db=database,
-                    charset='utf8mb4',
-                    cursorclass=pymysql.cursors.DictCursor)
+                    db=database)
                 ConnectionFactory.active_connections += 1
                 return con
 
-            except pymysql.err.OperationalError as e:
-                print('Error: %d: %s' % (e.args[0], e.args[1]))
+            # except mysql.connector.err.OperationalError as e:
+            #     print('Error: %d: %s' % (e.args[0], e.args[1]))
 
             except Exception:
                 raise AuthenticationError("Invalid credentials")
@@ -77,6 +76,6 @@ class DBUtils:
 
         # Step 5: Return the result
         if df:
-            return pd.DataFrame(rows, columns=cols)
+            return pd.DataFrame(rows, columns = cols)
         else:
             return rows, cols
