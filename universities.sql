@@ -100,6 +100,7 @@ create table watchlisted_university (
   name varchar(30) not null,
   ranking int not null,
   notes varchar(1000),
+  avg_star_rating float,
   foreign key (federal_school_code) references university(federal_school_code) -- define relationship - watchlisted university "is" university
   on update cascade on delete cascade
 );
