@@ -13,6 +13,9 @@ Search_WatchlistWindow, QtBaseClass = uic.loadUiType(ui_2)
 ui_3 = "ui_files/search.ui"
 SearchWindow, QtBaseClass = uic.loadUiType(ui_3)
 
+ui_4 = "ui_files/filter.ui"
+FilterWindow, QtBaseClass = uic.loadUiType(ui_4)
+
 
 class AccessDB(QMainWindow, AccessWindow):
 
@@ -60,7 +63,8 @@ class SearchorWatchlist(QMainWindow, Search_WatchlistWindow):
 
         # run functions
         self.search_button.clicked.connect(self.search_universities)
-        # self.watchlist_button.clicked.connect(self.search_universities)
+        # self.watchlist_button.clicked.connect(self.access_watchlist)
+        # self.review_button.clicked.connect(self.write_review)
         self.shutdown_db_button.clicked.connect(self.exit_app)
 
     def search_universities(self):
@@ -82,6 +86,9 @@ class SearchorWatchlist(QMainWindow, Search_WatchlistWindow):
         self.close()
 
     def access_watchlist(self):
+        pass
+
+    def write_review(self):
         pass
 
     def exit_app(self):
@@ -107,9 +114,9 @@ class Search(QMainWindow, SearchWindow):
         self.view = tableView
 
         # run functions
-        # self.filter_uni_button.clicked.connect(self.filter_universities)
-        # self.search_name_button.clicked.connect(self.search_universities_by_name)
-        # self.search_code_button.clicked.connect(self.search_universities_by_code)
+        self.filter_uni_button.clicked.connect(self.filter_universities)
+        self.search_name_button.clicked.connect(self.search_universities_by_name)
+        self.search_code_button.clicked.connect(self.search_universities_by_code)
         # self.search_loc_button.clicked.connect(self.search_locations)
         # self.search_review_button.clicked.connect(self.search_reviews)
         self.view_club_button.clicked.connect(self.view_clubs)
@@ -119,14 +126,40 @@ class Search(QMainWindow, SearchWindow):
         self.shutdown_db_button.clicked.connect(self.exit_app)
 
     def filter_universities(self):
-        """ filter -> done filtering button on filter windwow -> new window with text box of what universities to add to list """
-        pass
+        """ Open window to filter universities """
+
+        # change windows to filter window
+        self.filter = Filter(self.university_finder, self.model, self.view)
+        self.filter.show()
+        self.close()
 
     def search_universities_by_name(self):
-        pass
+        """ Search for university based on name """
+
+        # get user-inputted name and call procedure
+        name = str(self.name_box.toPlainText())
+        df = self.university_finder.search_universities_by_name(name)
+
+        # view dataframe
+        self.name_model = pandasModel(df)
+        self.name_view = QTableView()
+        self.name_view.setModel(self.name_model)
+        self.name_view.resize(800, 75)
+        self.name_view.show()
 
     def search_universities_by_code(self):
-        pass
+        """ Search for university based on federal school code """
+
+        # get user-inputted name and call procedure
+        code = str(self.code_box.toPlainText())
+        df = self.university_finder.search_universities_by_code(code)
+
+        # view dataframe
+        self.code_model = pandasModel(df)
+        self.code_view = QTableView()
+        self.code_view.setModel(self.code_model)
+        self.code_view.resize(800, 75)
+        self.code_view.show()
 
     def search_locations(self):
         pass
@@ -182,6 +215,46 @@ class Search(QMainWindow, SearchWindow):
         # open previous window obj
         self.search_or_watchlist = SearchorWatchlist(self.university_finder)
         self.search_or_watchlist.show()
+        self.close()
+
+    def exit_app(self):
+        """ Shutdown db and close application """
+
+        self.university_finder.shutdown()
+        self.view.close()
+        self.close()
+
+
+class Filter(QMainWindow, FilterWindow):
+
+    def __init__(self, university_finder, pandasModel, tableView):
+        QMainWindow.__init__(self)
+        FilterWindow.__init__(self)
+        self.setupUi(self)
+
+        # initialize object to utilize database
+        self.university_finder = university_finder
+
+        # initialize pandasModel and tableView
+        self.model = pandasModel
+        self.view = tableView
+
+        # run functions
+        # self.filter_uni_button.clicked.connect(self.filter_universities)
+        self.filter_button.clicked.connect(self.filter)
+        self.back_button.clicked.connect(self.go_back)
+        self.shutdown_db_button.clicked.connect(self.exit_app)
+
+    def filter(self):
+        """ filter -> filter button on new window -> new window with text box of what universities to add to list """
+        pass
+
+    def go_back(self):
+        """ Go to previous window """
+
+        # open previous window obj
+        self.search = Search(self.university_finder, self.model, self.view)
+        self.search.show()
         self.close()
 
     def exit_app(self):

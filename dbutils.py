@@ -79,3 +79,25 @@ class DBUtils:
             return pd.DataFrame(rows, columns = cols)
         else:
             return rows, cols
+
+    def callProc(self, query, args, df=True):
+
+        # Step 1: Create cursor
+        cur = self.con.cursor(prepared = True)
+
+        # Step 2: Execute the query
+        cur.execute(query, args)
+
+        # Step 3: Get the resulting rows and column names
+        rows = cur.fetchall()
+        cols = list(cur.column_names)
+
+        # Step 4: Close the cursor
+        cur.close()
+
+        # Step 5: Return the result
+        if df:
+            return pd.DataFrame(rows, columns = cols)
+        else:
+            return rows, cols
+

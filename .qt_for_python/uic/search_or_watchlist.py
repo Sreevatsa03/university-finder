@@ -24,9 +24,12 @@ class Ui_MainWindow(object):
         self.shutdown_db_button = QtWidgets.QPushButton(self.centralwidget)
         self.shutdown_db_button.setGeometry(QtCore.QRect(70, 160, 151, 31))
         self.shutdown_db_button.setObjectName("shutdown_db_button")
+        self.review_button = QtWidgets.QPushButton(self.centralwidget)
+        self.review_button.setGeometry(QtCore.QRect(70, 110, 151, 31))
+        self.review_button.setObjectName("review_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 298, 24))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 298, 37))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -39,6 +42,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.search_button.setText(_translate("MainWindow", "Search Universities"))
+        self.search_button.setText(_translate("MainWindow", "Search"))
         self.watchlist_button.setText(_translate("MainWindow", "University Watchlist"))
         self.shutdown_db_button.setText(_translate("MainWindow", "Shutdown Database"))
+        self.review_button.setText(_translate("MainWindow", "Write Review"))

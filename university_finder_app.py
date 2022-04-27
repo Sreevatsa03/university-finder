@@ -5,8 +5,9 @@
 # %% Simple selector (MySQL database)
 # import pymysql for a simple interface to a MySQL DB
 
-import pymysql
+import mysql.connector
 from dbutils import DBUtils
+import pandas as pd
 
 
 class UniversityFinder():
@@ -38,20 +39,20 @@ class UniversityFinder():
     def search_universities_by_name(self, name):
         """ Search university by name """
 
-        query = f"""
-            call search_by_name('{name}')
+        query = """
+            call search_by_name(%s);
             """
 
-        return self.db.execute(query)
+        return self.db.callProc(query, [name])
 
     def search_universities_by_code(self, code):
         """ Search university by federal school code """
 
-        query = f"""
-            call search_by_federal_school_code('{code}')
+        query = """
+            call search_by_federal_school_code(%s);
             """
 
-        return self.db.execute(query)
+        return self.db.callProc(query, [code])
 
     def view_clubs(self):
         """ View all clubs """
@@ -89,3 +90,11 @@ class UniversityFinder():
             """
 
         return self.db.execute(query)
+
+# def main():
+#     finder = UniversityFinder()
+#     finder.authenticate('root', 'MySQLSnukala03#')
+#     finder.search_universities_by_code("002627")
+
+# if __name__ == '__main__':
+#     main()
