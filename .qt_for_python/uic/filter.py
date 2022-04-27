@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(461, 765)
+        MainWindow.resize(461, 574)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.fee_box = QtWidgets.QTextEdit(self.centralwidget)
@@ -250,70 +250,14 @@ class Ui_MainWindow(object):
         self.campus_box = QtWidgets.QTextEdit(self.centralwidget)
         self.campus_box.setGeometry(QtCore.QRect(170, 350, 111, 31))
         self.campus_box.setObjectName("campus_box")
-        self.fee_label_9 = QtWidgets.QLabel(self.centralwidget)
-        self.fee_label_9.setGeometry(QtCore.QRect(20, 600, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily(".AppleSystemUIFont")
-        font.setPointSize(16)
-        font.setBold(True)
-        font.setItalic(False)
-        font.setWeight(75)
-        self.fee_label_9.setFont(font)
-        self.fee_label_9.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.fee_label_9.setObjectName("fee_label_9")
-        self.fee_label_12 = QtWidgets.QLabel(self.centralwidget)
-        self.fee_label_12.setGeometry(QtCore.QRect(20, 550, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily(".AppleSystemUIFont")
-        font.setPointSize(16)
-        font.setBold(True)
-        font.setItalic(False)
-        font.setWeight(75)
-        self.fee_label_12.setFont(font)
-        self.fee_label_12.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.fee_label_12.setObjectName("fee_label_12")
-        self.public_box = QtWidgets.QTextEdit(self.centralwidget)
-        self.public_box.setGeometry(QtCore.QRect(250, 550, 111, 31))
-        self.public_box.setObjectName("public_box")
-        self.early_app_box = QtWidgets.QTextEdit(self.centralwidget)
-        self.early_app_box.setGeometry(QtCore.QRect(250, 600, 111, 31))
-        self.early_app_box.setObjectName("early_app_box")
-        self.state_box = QtWidgets.QTextEdit(self.centralwidget)
-        self.state_box.setGeometry(QtCore.QRect(250, 450, 111, 31))
-        self.state_box.setObjectName("state_box")
-        self.fee_label_10 = QtWidgets.QLabel(self.centralwidget)
-        self.fee_label_10.setGeometry(QtCore.QRect(20, 500, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily(".AppleSystemUIFont")
-        font.setPointSize(16)
-        font.setBold(True)
-        font.setItalic(False)
-        font.setWeight(75)
-        self.fee_label_10.setFont(font)
-        self.fee_label_10.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.fee_label_10.setObjectName("fee_label_10")
-        self.city_box = QtWidgets.QTextEdit(self.centralwidget)
-        self.city_box.setGeometry(QtCore.QRect(250, 500, 111, 31))
-        self.city_box.setObjectName("city_box")
-        self.fee_label_13 = QtWidgets.QLabel(self.centralwidget)
-        self.fee_label_13.setGeometry(QtCore.QRect(20, 450, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily(".AppleSystemUIFont")
-        font.setPointSize(16)
-        font.setBold(True)
-        font.setItalic(False)
-        font.setWeight(75)
-        self.fee_label_13.setFont(font)
-        self.fee_label_13.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.fee_label_13.setObjectName("fee_label_13")
         self.shutdown_db_button = QtWidgets.QPushButton(self.centralwidget)
-        self.shutdown_db_button.setGeometry(QtCore.QRect(310, 690, 151, 31))
+        self.shutdown_db_button.setGeometry(QtCore.QRect(310, 500, 151, 31))
         self.shutdown_db_button.setObjectName("shutdown_db_button")
         self.back_button = QtWidgets.QPushButton(self.centralwidget)
-        self.back_button.setGeometry(QtCore.QRect(0, 690, 81, 31))
+        self.back_button.setGeometry(QtCore.QRect(0, 500, 81, 31))
         self.back_button.setObjectName("back_button")
         self.filter_button = QtWidgets.QPushButton(self.centralwidget)
-        self.filter_button.setGeometry(QtCore.QRect(180, 650, 81, 31))
+        self.filter_button.setGeometry(QtCore.QRect(180, 460, 81, 31))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
@@ -335,27 +279,103 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.fee_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>"))
         self.fee_label.setText(_translate("MainWindow", "Application Fee:"))
         self.filter_universities_label.setText(_translate("MainWindow", "Filter Universities"))
         self.to_label.setText(_translate("MainWindow", "to"))
+        self.fee_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">90</p></body></html>"))
+        self.tuition_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">62000</p></body></html>"))
+        self.tuition_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>"))
         self.fee_label_2.setText(_translate("MainWindow", "Tuition:"))
         self.to_label_2.setText(_translate("MainWindow", "to"))
         self.to_label_3.setText(_translate("MainWindow", "to"))
+        self.aid_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">64000</p></body></html>"))
+        self.sat_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">400</p></body></html>"))
         self.fee_label_3.setText(_translate("MainWindow", "Average SAT:"))
+        self.aid_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>"))
         self.fee_label_4.setText(_translate("MainWindow", "Average Aid:"))
         self.to_label_4.setText(_translate("MainWindow", "to"))
+        self.sat_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1600</p></body></html>"))
         self.to_label_5.setText(_translate("MainWindow", "to"))
+        self.campus_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">8700</p></body></html>"))
         self.fee_label_5.setText(_translate("MainWindow", "Acceptance Rate:"))
+        self.rank_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">20</p></body></html>"))
+        self.acceptance_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">20</p></body></html>"))
         self.to_label_6.setText(_translate("MainWindow", "to"))
+        self.body_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>"))
         self.fee_label_6.setText(_translate("MainWindow", "Student Body:"))
+        self.acceptance_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>"))
+        self.rank_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1</p></body></html>"))
         self.fee_label_7.setText(_translate("MainWindow", "Ranking:"))
         self.fee_label_8.setText(_translate("MainWindow", "Campus Size:"))
         self.to_label_7.setText(_translate("MainWindow", "to"))
         self.to_label_8.setText(_translate("MainWindow", "to"))
-        self.fee_label_9.setText(_translate("MainWindow", "Early Application:"))
-        self.fee_label_12.setText(_translate("MainWindow", "Public:"))
-        self.fee_label_10.setText(_translate("MainWindow", "City:"))
-        self.fee_label_13.setText(_translate("MainWindow", "State:"))
+        self.body_box_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">32000</p></body></html>"))
+        self.campus_box.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0</p></body></html>"))
         self.shutdown_db_button.setText(_translate("MainWindow", "Shutdown Database"))
         self.back_button.setText(_translate("MainWindow", "Go Back"))
         self.filter_button.setText(_translate("MainWindow", "FILTER"))

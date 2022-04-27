@@ -43,7 +43,8 @@ class AccessDB(QMainWindow, AccessWindow):
         self.university_finder.authenticate(user, password)
 
         # open new window
-        self.search_or_watchlist = SearchorWatchlist(self.university_finder)
+        self.search_or_watchlist = SearchorWatchlist(
+            user, password, self.university_finder)
         self.search_or_watchlist.show()
         self.close()
 
@@ -56,12 +57,13 @@ class AccessDB(QMainWindow, AccessWindow):
 
 class SearchorWatchlist(QMainWindow, Search_WatchlistWindow):
 
-    def __init__(self, university_finder):
+    def __init__(self, user, password, university_finder):
         QMainWindow.__init__(self)
         Search_WatchlistWindow.__init__(self)
         self.setupUi(self)
 
         # initialize object to utilize database
+        self.user, self.password = user, password
         self.university_finder = university_finder
 
         # run functions
@@ -84,7 +86,8 @@ class SearchorWatchlist(QMainWindow, Search_WatchlistWindow):
         self.view.show()
 
         # change windows to search window
-        self.search = Search(self.university_finder, self.model, self.view)
+        self.search = Search(self.user, self.password,
+                             self.university_finder, self.model, self.view)
         self.search.show()
         self.close()
 
@@ -104,12 +107,13 @@ class SearchorWatchlist(QMainWindow, Search_WatchlistWindow):
 
 class Search(QMainWindow, SearchWindow):
 
-    def __init__(self, university_finder, pandasModel, tableView):
+    def __init__(self, user, password, university_finder, pandasModel, tableView):
         QMainWindow.__init__(self)
         SearchWindow.__init__(self)
         self.setupUi(self)
 
         # initialize object to utilize database
+        self.user, self.password = user, password
         self.university_finder = university_finder
 
         # initialize pandasModel and tableView
@@ -118,8 +122,10 @@ class Search(QMainWindow, SearchWindow):
 
         # run functions
         self.filter_uni_button.clicked.connect(self.filter_universities)
-        self.search_name_button.clicked.connect(self.search_universities_by_name)
-        self.search_code_button.clicked.connect(self.search_universities_by_code)
+        self.search_name_button.clicked.connect(
+            self.search_universities_by_name)
+        self.search_code_button.clicked.connect(
+            self.search_universities_by_code)
         # self.search_loc_button.clicked.connect(self.search_locations)
         # self.search_review_button.clicked.connect(self.search_reviews)
         self.view_club_button.clicked.connect(self.view_clubs)
@@ -132,7 +138,8 @@ class Search(QMainWindow, SearchWindow):
         """ Open window to filter universities """
 
         # change windows to filter window
-        self.filter = Filter(self.university_finder, self.model, self.view)
+        self.filter = Filter(self.user, self.password,
+                             self.university_finder, self.model, self.view)
         self.filter.show()
         self.close()
 
@@ -166,7 +173,7 @@ class Search(QMainWindow, SearchWindow):
 
     def search_locations(self):
         pass
-    
+
     def search_reviews(self):
         pass
 
@@ -216,7 +223,8 @@ class Search(QMainWindow, SearchWindow):
         self.view.close()
 
         # open previous window obj
-        self.search_or_watchlist = SearchorWatchlist(self.university_finder)
+        self.search_or_watchlist = SearchorWatchlist(
+            self.user, self.password, self.university_finder)
         self.search_or_watchlist.show()
         self.close()
 
@@ -230,12 +238,13 @@ class Search(QMainWindow, SearchWindow):
 
 class Filter(QMainWindow, FilterWindow):
 
-    def __init__(self, university_finder, pandasModel, tableView):
+    def __init__(self, user, password, university_finder, pandasModel, tableView):
         QMainWindow.__init__(self)
         FilterWindow.__init__(self)
         self.setupUi(self)
 
         # initialize object to utilize database
+        self.user, self.password = user, password
         self.university_finder = university_finder
 
         # initialize pandasModel and tableView
@@ -250,54 +259,34 @@ class Filter(QMainWindow, FilterWindow):
     def filter(self):
         """ Filter universities based on user-selected attributes """
 
-        # get dataframes for each filter
-        min_fee, max_fee = str(self.fee_box.toPlainText()), str(self.fee_box_2.toPlainText())
-        if min_fee and max_fee:
-            df = self.university_finder.search_universities_by_application_fee(min_fee, max_fee)
+        # get data from text boxes of each filter
+        min_fee, max_fee = str(self.fee_box.toPlainText()), str(
+            self.fee_box_2.toPlainText())
 
-        min_tuition, max_tuition = str(self.tuition_box.toPlainText()), str(self.tuition_box_2.toPlainText())
-        if min_tuition and max_tuition:
-            df = self.university_finder.search_universities_by_tuition(min_tuition, max_tuition)
+        min_tuition, max_tuition = str(self.tuition_box.toPlainText()), str(
+            self.tuition_box_2.toPlainText())
 
-        min_aid, max_aid = str(self.aid_box.toPlainText()), str(self.aid_box_2.toPlainText())
-        if min_aid and max_aid:
-            df = self.university_finder.search_universities_by_aid(min_aid, max_aid)
+        min_aid, max_aid = str(self.aid_box.toPlainText()), str(
+            self.aid_box_2.toPlainText())
 
-        min_sat, max_sat = str(self.sat_box.toPlainText()), str(self.sat_box_2.toPlainText())
-        if min_sat and max_sat:
-            df = self.university_finder.search_universities_by_SAT(min_sat, max_sat)
+        min_sat, max_sat = str(self.sat_box.toPlainText()), str(
+            self.sat_box_2.toPlainText())
 
-        min_rank, max_rank = str(self.rank_box.toPlainText()), str(self.rank_box_2.toPlainText())
-        if min_rank and max_rank:
-            df = self.university_finder.search_universities_by_ranking(min_rank, max_rank)
+        min_rank, max_rank = str(self.rank_box.toPlainText()), str(
+            self.rank_box_2.toPlainText())
 
-        min_body, max_body = str(self.body_box.toPlainText()), str(self.body_box_2.toPlainText())
-        if min_body and max_body:
-            df = self.university_finder.search_universities_by_student_body_size(min_body, max_body)
+        min_body, max_body = str(self.body_box.toPlainText()), str(
+            self.body_box_2.toPlainText())
 
-        min_campus, max_campus = str(self.campus_box.toPlainText()), str(self.campus_box_2.toPlainText())
-        if min_campus and max_campus:
-            df = self.university_finder.search_universities_by_campus_size(min_campus, max_campus)
+        min_campus, max_campus = str(self.campus_box.toPlainText()), str(
+            self.campus_box_2.toPlainText())
 
-        min_acceptance, max_acceptance = str(self.acceptance_box.toPlainText()), str(self.acceptance_box_2.toPlainText())
-        if min_acceptance and max_acceptance:
-            df = self.university_finder.search_universities_by_acceptance(min_acceptance, max_acceptance)
+        min_acceptance, max_acceptance = str(self.acceptance_box.toPlainText()), str(
+            self.acceptance_box_2.toPlainText())
 
-        state = str(self.state_box.toPlainText())
-        if state:
-            df = self.university_finder.search_universities_by_state(state)
-
-        city = str(self.city_box.toPlainText())
-        if city:
-            df = self.university_finder.search_universities_by_city(city)
-
-        public = str(self.public_box.toPlainText())
-        if public:
-            df = self.university_finder.search_universities_by_public(public)
-
-        early_app = str(self.early_app_box.toPlainText())
-        if early_app:
-            df = self.university_finder.search_universities_by_early_application(early_app)
+        # make dataframe from filters
+        df = self.university_finder.search_universities(min_fee, max_fee, min_tuition, max_tuition, min_aid, max_aid, min_sat, max_sat, min_rank, max_rank,
+                                                        min_body, max_body, min_campus, max_campus, min_acceptance, max_acceptance)
 
         # close table view
         self.view.close()
@@ -310,7 +299,8 @@ class Filter(QMainWindow, FilterWindow):
         self.filtered_view.show()
 
         # change windows to add_to_watchlist window
-        self.add_to_watchlist = AddtoWatchlist(self.university_finder, self.model, self.filtered_view)
+        self.add_to_watchlist = AddtoWatchlist(
+            self.user, self.password, self.university_finder, self.model, self.filtered_view)
         self.add_to_watchlist.show()
         self.close()
 
@@ -322,7 +312,8 @@ class Filter(QMainWindow, FilterWindow):
         self.filtered_view.close()
 
         # open previous window obj
-        self.search = Search(self.university_finder, self.model, self.view)
+        self.search = Search(self.user, self.password,
+                             self.university_finder, self.model, self.view)
         self.search.show()
         self.close()
 
@@ -337,14 +328,15 @@ class Filter(QMainWindow, FilterWindow):
 
 class AddtoWatchlist(QMainWindow, AddWatchlistWindow):
 
-    def __init__(self, university_finder, pandasModel, tableView):
+    def __init__(self, user, password, university_finder, pandasModel, tableView):
         QMainWindow.__init__(self)
         AddWatchlistWindow.__init__(self)
         self.setupUi(self)
 
         # initialize object to utilize database
+        self.user, self.password = user, password
         self.university_finder = UniversityFinder()
-        self.university_finder.authenticate('root', 'MySQLSnukala03#')
+        self.university_finder.authenticate(user, password)
 
         # initialize pandasModel and tableView
         self.model = pandasModel
@@ -361,7 +353,7 @@ class AddtoWatchlist(QMainWindow, AddWatchlistWindow):
         name = str(self.name_box.toPlainText())
         notes = str(self.notes_box.toPlainText())
         self.university_finder.add_to_watchlist(name, notes)
-        
+
         # close view and open new view of watchlist
         self.view.close()
 
@@ -371,7 +363,6 @@ class AddtoWatchlist(QMainWindow, AddWatchlistWindow):
         self.watchlist_view.setModel(self.watchlist_model)
         self.watchlist_view.resize(800, 500)
         self.watchlist_view.show()
-        
 
     def go_back(self):
         """ Go to previous window """
@@ -380,7 +371,8 @@ class AddtoWatchlist(QMainWindow, AddWatchlistWindow):
         self.view.close()
 
         # open previous window obj
-        self.search = Search(self.university_finder, self.model, self.view)
+        self.search = Search(self.user, self.password,
+                             self.university_finder, self.model, self.view)
         self.search.show()
         self.close()
 

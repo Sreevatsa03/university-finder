@@ -239,54 +239,43 @@ create procedure search_universities
 (
 	application_fee_min int,
     application_fee_max int,
-	has_early_application_p bool,
 	tuition_min int,
     tuition_max int,
 	avg_aid_awarded_min int,
     avg_aid_awarded_max int,
 	avg_SAT_min int,
     avg_SAT_max int,
-	ranking_top int,
-    ranking_bottom int,
+	ranking_bottom int,
+    ranking_top int,
 	student_body_size_min int,
     student_body_size_max int,
 	campus_size_min int,
     campus_size_max int,
-	is_public_p bool,
 	acceptance_rate_min float,
-    acceptance_rate_max float,
-	state_p varchar(2),
-	city_p varchar(17)
+    acceptance_rate_max float
 )
 begin
     if not exists (select * from university 
 				where (application_fee >= application_fee_min and application_fee <= application_fee_max)
-				and has_early_application = has_early_application_p
 				and (tuition >= tuition_min and tuition <= tuition_max)
 				and (avg_aid_awarded >= avg_aid_awarded_min and avg_aid_awarded <= avg_aid_awarded_max)
 				and (avg_SAT >= avg_SAT_min and avg_SAT <= avg_SAT_max)
 				and (ranking >= ranking_bottom and ranking <= ranking_top)
 				and (student_body_size >= student_body_size_min and student_body_size <= student_body_size_max)
 				and (campus_size >= campus_size_min and campus_size <= campus_size_max)
-				and is_public = is_public_p
-				and (acceptance_rate >= acceptance_rate_min and acceptance_rate <= acceptance_rate_max)
-				and state = state_p
-				and city = city_p) then
+				and (acceptance_rate >= acceptance_rate_min and acceptance_rate <= acceptance_rate_max))
+	then
 		select "There are no schools with these search options in the database." as message;
 	else
 		select * from university 
 			where (application_fee >= application_fee_min and application_fee <= application_fee_max)
-            and has_early_application = has_early_application_p
             and (tuition >= tuition_min and tuition <= tuition_max)
             and (avg_aid_awarded >= avg_aid_awarded_min and avg_aid_awarded <= avg_aid_awarded_max)
             and (avg_SAT >= avg_SAT_min and avg_SAT <= avg_SAT_max)
             and (ranking >= ranking_bottom and ranking <= ranking_top)
             and (student_body_size >= student_body_size_min and student_body_size <= student_body_size_max)
             and (campus_size >= campus_size_min and campus_size <= campus_size_max)
-            and is_public = is_public_p
-            and (acceptance_rate >= acceptance_rate_min and acceptance_rate <= acceptance_rate_max)
-            and state = state_p
-            and city = city_p;
+            and (acceptance_rate >= acceptance_rate_min and acceptance_rate <= acceptance_rate_max);
 	end if;
 end $$
 DELIMITER ;

@@ -15,6 +15,10 @@ select d.name, d.num_students, u.name as university_name from department as d
 		on d.university = u.federal_school_code
 	order by university_name;
     
+call search_universities(0, 75, 0, 60000, 50000, 100000, 1450, 1600, 1, 10, 0, 10000, 0, 300, 0, 10);
+
+select * from university where name = "Northwestern University";
+
     
 DELIMITER $$
 create trigger update_avg_star_rating

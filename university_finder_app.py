@@ -199,6 +199,17 @@ class UniversityFinder():
 
         return self.db.callProc(query, [val])
 
+    def search_universities(self, fee_min, fee_max, tuition_min, tuition_max, aid_min, aid_max, sat_min, sat_max, rank_min, rank_max,
+                            body_min, body_max, campus_min, campus_max, acceptance_min, acceptance_max):
+        """ Search university by all fields """
+
+        query = """
+            call search_universities(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+            """
+
+        return self.db.callProc(query, [fee_min, fee_max, tuition_min, tuition_max, aid_min, aid_max, sat_min, sat_max, rank_min, rank_max,
+                                        body_min, body_max, campus_min, campus_max, acceptance_min, acceptance_max])
+
     def add_to_watchlist(self, name, notes):
         """ Add university to watchlist """
 
@@ -224,8 +235,7 @@ class UniversityFinder():
 #     finder.authenticate('root', 'MySQLSnukala03#')
 
 
-#     finder.add_to_watchlist('Columbia University', 'cool')
-#     print(finder.show_watchlist())
+#     print(finder.search_universities(0, 75, 0, 60000, 50000, 100000, 1450, 1600, 1, 10, 0, 10000, 0, 300, 0, 10))
 
 # if __name__ == '__main__':
 #     main()
