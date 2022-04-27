@@ -133,10 +133,10 @@ create procedure search_by_student_body_size
     student_body_size_max int
 )
 begin 
-	if not exists (select * from university where (student_body_size >= student_body_size_min and search_by_student_body_size <= search_by_student_body_size_max)) then
+	if not exists (select * from university where (student_body_size >= student_body_size_min and student_body_size <= student_body_size_max)) then
 		select "There are no schools that have a student body size within the given range" as message;
 	else
-		select * from university where (student_body_size >= student_body_size_min and search_by_student_body_size <= search_by_student_body_size_max);
+		select * from university where (student_body_size >= student_body_size_min and student_body_size <= student_body_size_max);
 	end if;
 end $$
 DELIMITER ;
@@ -232,6 +232,192 @@ begin
     values(star_rating_p, description_p, author_p, university_p);
 end $$
 DELIMITER ;
+
+# search university
+DELIMITER $$
+create procedure search_universities
+(
+	application_fee_min int,
+    application_fee_max int,
+	has_early_application_p bool,
+	tuition_min int,
+    tuition_max int,
+	avg_aid_awarded_min int,
+    avg_aid_awarded_max int,
+	avg_SAT_min int,
+    avg_SAT_max int,
+	ranking_top int,
+    ranking_bottom int,
+	student_body_size_min int,
+    student_body_size_max int,
+	campus_size_min int,
+    campus_size_max int,
+	is_public_p bool,
+	acceptance_rate_min float,
+    acceptance_rate_max float,
+	state_p varchar(2),
+	city_p varchar(17)
+)
+begin
+    if not exists (select * from university 
+				where (application_fee >= application_fee_min and application_fee <= application_fee_max)
+				and has_early_application = has_early_application_p
+				and (tuition >= tuition_min and tuition <= tuition_max)
+				and (avg_aid_awarded >= avg_aid_awarded_min and avg_aid_awarded <= avg_aid_awarded_max)
+				and (avg_SAT >= avg_SAT_min and avg_SAT <= avg_SAT_max)
+				and (ranking >= ranking_bottom and ranking <= ranking_top)
+				and (student_body_size >= student_body_size_min and student_body_size <= student_body_size_max)
+				and (campus_size >= campus_size_min and campus_size <= campus_size_max)
+				and is_public = is_public_p
+				and (acceptance_rate >= acceptance_rate_min and acceptance_rate <= acceptance_rate_max)
+				and state = state_p
+				and city = city_p) then
+		select "There are no schools with these search options in the database." as message;
+	else
+		select * from university 
+			where (application_fee >= application_fee_min and application_fee <= application_fee_max)
+            and has_early_application = has_early_application_p
+            and (tuition >= tuition_min and tuition <= tuition_max)
+            and (avg_aid_awarded >= avg_aid_awarded_min and avg_aid_awarded <= avg_aid_awarded_max)
+            and (avg_SAT >= avg_SAT_min and avg_SAT <= avg_SAT_max)
+            and (ranking >= ranking_bottom and ranking <= ranking_top)
+            and (student_body_size >= student_body_size_min and student_body_size <= student_body_size_max)
+            and (campus_size >= campus_size_min and campus_size <= campus_size_max)
+            and is_public = is_public_p
+            and (acceptance_rate >= acceptance_rate_min and acceptance_rate <= acceptance_rate_max)
+            and state = state_p
+            and city = city_p;
+	end if;
+end $$
+DELIMITER ;
+
+# search location by city
+DELIMITER $$
+create procedure search_location_by_city
+(
+	city_p varchar(2)
+)
+begin
+	if not exists (select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name, u.federal_school_code 
+					from location as l join university as u
+					on l.state = u.state and l.city = u.city
+					where l.city = city_p) then
+		select "There are no schools that are located in the given city in the database." as message;
+	else 
+		select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name , u.federal_school_code 
+			from location as l join university as u
+            on l.state = u.state and l.city = u.city
+            where l.city = city_p;
+	end if;
+end $$
+DELIMITER ;
+
+# search location by state
+DELIMITER $$
+create procedure search_location_by_state
+(
+	state_p varchar(2)
+)
+begin
+	if not exists (select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name, u.federal_school_code  
+					from location as l join university as u
+					on l.state = u.state and l.city = u.city
+					where l.state = state_p) then
+		select "There are no schools that are located in the given state in the database." as message;
+	else 
+		select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name, u.federal_school_code  
+			from location as l join university as u
+            on l.state = u.state and l.city = u.city
+            where l.state = state_p;
+	end if;
+end $$
+DELIMITER ;
+
+# function that gets the avg star rating of a university
+DELIMITER $$
+create function get_avg_star_rating
+(
+	code_p varchar(30)
+)
+returns int
+deterministic
+begin
+	declare avg_rating float;
+    
+    select avg(r.star_rating) into avg_rating
+		from review as r join university as u
+		on r.university = u.federal_school_code
+        where r.university = code_p;
+	return(avg_rating);
+end $$
+DELIMITER ;
+
+# trigger that updates average star rating of watchlisted university when review is added
+DELIMITER $$
+create trigger update_avg_star_rating
+	after insert on review 
+    for each row
+begin
+	declare new_avg_rating float;
+    select get_avg_star_rating(new.university) into new_avg_rating;
+    
+	update watchlisted_university
+    set avg_star_rating = new_avg_rating
+    where federal_school_code = new.university;
+end $$
+delimiter ;
+
+# add to watchlist by university name
+DELIMITER $$
+create procedure add_to_watchlist
+(
+	university_p varchar(30),
+    notes_p varchar(1000)
+)
+begin
+	declare uni_fsc varchar(6);
+    declare uni_rank int;
+    declare avg_star_rating float;
+    
+    select federal_school_code into uni_fsc from university where name = university_p;
+    select ranking into uni_rank from university where name = university_p;
+    select get_avg_star_rating(uni_fsc) into avg_star_rating;
+    
+	insert into watchlisted_university
+    values(uni_fsc, university_p, uni_rank, notes_p, avg_star_rating);
+end $$
+DELIMITER ;
+
+#update the notes of a watchlisted university
+DELIMITER $$
+create procedure update_notes
+(
+	university_p varchar(30),
+    notes_p varchar(1000)
+)
+begin
+	update watchlisted_university
+    set notes = notes_p
+    where name = university_p;
+end $$
+DELIMITER ;
+
+#filter reviews based on star rating
+DELIMITER $$
+create procedure filter_reviews
+(
+	star_rating_p int
+)
+begin
+	if not exists (select * from review where star_rating = star_rating_p) then
+		select "There are no reviews with the given star rating in the database." as message;
+	else 
+		select * from review where star_rating = star_rating_p;
+	end if;
+end $$
+DELIMITER ;
+
+
 
 
 -- drop procedure search_by_name;

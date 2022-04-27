@@ -16,6 +16,9 @@ SearchWindow, QtBaseClass = uic.loadUiType(ui_3)
 ui_4 = "ui_files/filter.ui"
 FilterWindow, QtBaseClass = uic.loadUiType(ui_4)
 
+ui_5 = "ui_files/add_to_watchlist.ui"
+AddWatchlistWindow, QtBaseClass = uic.loadUiType(ui_5)
+
 
 class AccessDB(QMainWindow, AccessWindow):
 
@@ -240,17 +243,141 @@ class Filter(QMainWindow, FilterWindow):
         self.view = tableView
 
         # run functions
-        # self.filter_uni_button.clicked.connect(self.filter_universities)
         self.filter_button.clicked.connect(self.filter)
         self.back_button.clicked.connect(self.go_back)
         self.shutdown_db_button.clicked.connect(self.exit_app)
 
     def filter(self):
-        """ filter -> filter button on new window -> new window with text box of what universities to add to list """
-        pass
+        """ Filter universities based on user-selected attributes """
+
+        # get dataframes for each filter
+        min_fee, max_fee = str(self.fee_box.toPlainText()), str(self.fee_box_2.toPlainText())
+        if min_fee and max_fee:
+            df = self.university_finder.search_universities_by_application_fee(min_fee, max_fee)
+
+        min_tuition, max_tuition = str(self.tuition_box.toPlainText()), str(self.tuition_box_2.toPlainText())
+        if min_tuition and max_tuition:
+            df = self.university_finder.search_universities_by_tuition(min_tuition, max_tuition)
+
+        min_aid, max_aid = str(self.aid_box.toPlainText()), str(self.aid_box_2.toPlainText())
+        if min_aid and max_aid:
+            df = self.university_finder.search_universities_by_aid(min_aid, max_aid)
+
+        min_sat, max_sat = str(self.sat_box.toPlainText()), str(self.sat_box_2.toPlainText())
+        if min_sat and max_sat:
+            df = self.university_finder.search_universities_by_SAT(min_sat, max_sat)
+
+        min_rank, max_rank = str(self.rank_box.toPlainText()), str(self.rank_box_2.toPlainText())
+        if min_rank and max_rank:
+            df = self.university_finder.search_universities_by_ranking(min_rank, max_rank)
+
+        min_body, max_body = str(self.body_box.toPlainText()), str(self.body_box_2.toPlainText())
+        if min_body and max_body:
+            df = self.university_finder.search_universities_by_student_body_size(min_body, max_body)
+
+        min_campus, max_campus = str(self.campus_box.toPlainText()), str(self.campus_box_2.toPlainText())
+        if min_campus and max_campus:
+            df = self.university_finder.search_universities_by_campus_size(min_campus, max_campus)
+
+        min_acceptance, max_acceptance = str(self.acceptance_box.toPlainText()), str(self.acceptance_box_2.toPlainText())
+        if min_acceptance and max_acceptance:
+            df = self.university_finder.search_universities_by_acceptance(min_acceptance, max_acceptance)
+
+        state = str(self.state_box.toPlainText())
+        if state:
+            df = self.university_finder.search_universities_by_state(state)
+
+        city = str(self.city_box.toPlainText())
+        if city:
+            df = self.university_finder.search_universities_by_city(city)
+
+        public = str(self.public_box.toPlainText())
+        if public:
+            df = self.university_finder.search_universities_by_public(public)
+
+        early_app = str(self.early_app_box.toPlainText())
+        if early_app:
+            df = self.university_finder.search_universities_by_early_application(early_app)
+
+        # close table view
+        self.view.close()
+
+        # view dataframe
+        self.filtered_model = pandasModel(df)
+        self.filtered_view = QTableView()
+        self.filtered_view.setModel(self.filtered_model)
+        self.filtered_view.resize(800, 500)
+        self.filtered_view.show()
+
+        # change windows to add_to_watchlist window
+        self.add_to_watchlist = AddtoWatchlist(self.university_finder, self.model, self.filtered_view)
+        self.add_to_watchlist.show()
+        self.close()
 
     def go_back(self):
         """ Go to previous window """
+
+        # close table view
+        self.view.close()
+        self.filtered_view.close()
+
+        # open previous window obj
+        self.search = Search(self.university_finder, self.model, self.view)
+        self.search.show()
+        self.close()
+
+    def exit_app(self):
+        """ Shutdown db and close application """
+
+        self.university_finder.shutdown()
+        self.view.close()
+        self.filtered_view.close()
+        self.close()
+
+
+class AddtoWatchlist(QMainWindow, AddWatchlistWindow):
+
+    def __init__(self, university_finder, pandasModel, tableView):
+        QMainWindow.__init__(self)
+        AddWatchlistWindow.__init__(self)
+        self.setupUi(self)
+
+        # initialize object to utilize database
+        self.university_finder = UniversityFinder()
+        self.university_finder.authenticate('root', 'MySQLSnukala03#')
+
+        # initialize pandasModel and tableView
+        self.model = pandasModel
+        self.view = tableView
+
+        # run functions
+        self.add_uni_button.clicked.connect(self.add_to_watchlist)
+        self.back_button.clicked.connect(self.go_back)
+        self.shutdown_db_button.clicked.connect(self.exit_app)
+
+    def add_to_watchlist(self):
+        """ Add university to watchlist """
+
+        name = str(self.name_box.toPlainText())
+        notes = str(self.notes_box.toPlainText())
+        self.university_finder.add_to_watchlist(name, notes)
+        
+        # close view and open new view of watchlist
+        self.view.close()
+
+        df = self.university_finder.show_watchlist()
+        self.watchlist_model = pandasModel(df)
+        self.watchlist_view = QTableView()
+        self.watchlist_view.setModel(self.watchlist_model)
+        self.watchlist_view.resize(800, 500)
+        self.watchlist_view.show()
+        
+
+    def go_back(self):
+        """ Go to previous window """
+
+        # close table view
+        self.view.close()
 
         # open previous window obj
         self.search = Search(self.university_finder, self.model, self.view)

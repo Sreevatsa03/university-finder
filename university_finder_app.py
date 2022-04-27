@@ -91,10 +91,141 @@ class UniversityFinder():
 
         return self.db.execute(query)
 
+    def search_universities_by_application_fee(self, min_val, max_val):
+        """ Search university by application fee """
+
+        query = """
+            call search_by_application_fee(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_early_application(self, val):
+        """ Search university by early application """
+
+        query = """
+            call search_by_has_early_application(%s);
+            """
+
+        return self.db.callProc(query, [val])
+
+    def search_universities_by_tuition(self, min_val, max_val):
+        """ Search university by tuition """
+
+        query = """
+            call search_by_tuition(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_aid(self, min_val, max_val):
+        """ Search university by aid """
+
+        query = """
+            call search_by_avg_aid_awarded(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_SAT(self, min_val, max_val):
+        """ Search university by avg SAT """
+
+        query = """
+            call search_by_avg_SAT(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_ranking(self, min_val, max_val):
+        """ Search university by ranking """
+
+        query = """
+            call search_by_ranking(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_student_body_size(self, min_val, max_val):
+        """ Search university by student body size """
+
+        query = """
+            call search_by_student_body_size(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_campus_size(self, min_val, max_val):
+        """ Search university by camous size """
+
+        query = """
+            call search_by_campus_size(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_public(self, val):
+        """ Search university by public """
+
+        query = """
+            call search_by_is_public(%s);
+            """
+
+        return self.db.callProc(query, [val])
+
+    def search_universities_by_acceptance(self, min_val, max_val):
+        """ Search university by acceptance rate """
+
+        query = """
+            call search_by_acceptance_rate(%s, %s);
+            """
+
+        return self.db.callProc(query, [min_val, max_val])
+
+    def search_universities_by_state(self, val):
+        """ Search university by state """
+
+        query = """
+            call search_by_state(%s);
+            """
+
+        return self.db.callProc(query, [val])
+
+    def search_universities_by_city(self, val):
+        """ Search university by city """
+
+        query = """
+            call search_by_city(%s);
+            """
+
+        return self.db.callProc(query, [val])
+
+    def add_to_watchlist(self, name, notes):
+        """ Add university to watchlist """
+
+        query = """
+            call add_to_watchlist(%s, %s);
+            """
+
+        return self.db.callProc(query, [name, notes])
+
+    def show_watchlist(self):
+        """ Display all universities in watchlist """
+
+        query = f"""
+            select *
+            from watchlisted_university;
+            """
+
+        return self.db.execute(query)
+
+
 # def main():
 #     finder = UniversityFinder()
 #     finder.authenticate('root', 'MySQLSnukala03#')
-#     finder.search_universities_by_code("002627")
+
+
+#     finder.add_to_watchlist('Columbia University', 'cool')
+#     print(finder.show_watchlist())
 
 # if __name__ == '__main__':
 #     main()
