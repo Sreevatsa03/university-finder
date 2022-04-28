@@ -380,10 +380,11 @@ class UniversityFinder():
 
         try:
             query = f"""
-                select l.state, l.city, l.population, l.political_standing, l.climate_description, l.university, u.name from location as l
+                select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name from location as l
                 join university as u
-                on l.university = u.federal_school_code
-                order by university;
+                on l.state = u.state
+                and l.city = u.city
+                order by l.state;
                 """
 
             return self.db.execute(query)
