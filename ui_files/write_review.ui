@@ -6,43 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>463</width>
-    <height>373</height>
+    <width>472</width>
+    <height>372</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="add_uni_button">
+   <widget class="QLabel" name="universities_label">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>240</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Add University</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="name_box">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>60</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="add_watchlist_label">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
+      <x>170</x>
       <y>0</y>
-      <width>191</width>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
@@ -56,18 +33,98 @@
      </font>
     </property>
     <property name="text">
-     <string>Add to Watchlist</string>
+     <string>Write Review</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="fee_label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>.AppleSystemUIFont</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Star Rating:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="rating_box">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>50</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="description_box">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>130</y>
+      <width>341</width>
+      <height>121</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="notes_label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>130</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>.AppleSystemUIFont</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Description:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="name_box">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>90</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="name_label">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
-      <width>61</width>
+      <y>90</y>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -87,39 +144,30 @@
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="notes_label">
+   <widget class="QPushButton" name="write_review_button">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>61</width>
+      <x>170</x>
+      <y>260</y>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>.AppleSystemUIFont</family>
-      <pointsize>16</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-     </font>
-    </property>
     <property name="text">
-     <string>Notes:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     <string>Publish Review</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="notes_box">
+   <widget class="QPushButton" name="shutdown_db_button">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>110</y>
-      <width>371</width>
-      <height>111</height>
+      <x>320</x>
+      <y>300</y>
+      <width>151</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Shutdown Database</string>
     </property>
    </widget>
    <widget class="QPushButton" name="back_button">
@@ -135,26 +183,13 @@
      <string>Go Back</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="shutdown_db_button">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>300</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Shutdown Database</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>463</width>
+     <width>472</width>
      <height>24</height>
     </rect>
    </property>

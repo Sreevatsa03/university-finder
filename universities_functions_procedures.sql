@@ -225,11 +225,15 @@ create procedure write_review
 	star_rating_p int,
     description_p varchar(1000),
     author_p varchar(30),
-    university_p varchar(6)
+    university_p varchar(60)
 )
 begin
+	declare uni_fsc varchar(6);	
+    
+    select federal_school_code into uni_fsc from university where name = university_p;
+	
 	insert into review (star_rating, description, author, university)
-    values(star_rating_p, description_p, author_p, university_p);
+    values(star_rating_p, description_p, author_p, uni_fsc);
 end $$
 DELIMITER ;
 
@@ -284,7 +288,7 @@ DELIMITER ;
 DELIMITER $$
 create procedure search_location_by_city
 (
-	city_p varchar(2)
+	city_p varchar(60)
 )
 begin
 	if not exists (select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name, u.federal_school_code 
@@ -318,6 +322,30 @@ begin
 			from location as l join university as u
             on l.state = u.state and l.city = u.city
             where l.state = state_p;
+	end if;
+end $$
+DELIMITER ;
+
+# search location by city and state
+DELIMITER $$
+create procedure search_location
+(
+	city_p varchar(60),
+    state_p varchar(2)
+)
+begin
+	if not exists (select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name 
+					from location as l join university as u
+					on l.state = u.state and l.city = u.city
+					where l.city = city_p
+                    and l.state = state_p) then
+		select "There are no locations in the database with the given city and state" as message;
+	else 
+		select l.state, l.city, l.population, l.political_standing, l.climate_description, u.name 
+			from location as l join university as u
+            on l.state = u.state and l.city = u.city
+            where l.city = city_p
+            and l.state = state_p;
 	end if;
 end $$
 DELIMITER ;
@@ -381,13 +409,24 @@ DELIMITER ;
 DELIMITER $$
 create procedure update_notes
 (
-	university_p varchar(30),
+	university_p varchar(60),
     notes_p varchar(1000)
 )
 begin
 	update watchlisted_university
     set notes = notes_p
     where name = university_p;
+end $$
+DELIMITER ;
+
+# delete watchlisted university
+DELIMITER $$
+create procedure remove_from_watchlist
+(
+	university_p varchar(60)
+)
+begin
+	delete from watchlisted_university where name = university_p;
 end $$
 DELIMITER ;
 
@@ -405,23 +444,3 @@ begin
 	end if;
 end $$
 DELIMITER ;
-
-
-
-
--- drop procedure search_by_name;
--- drop procedure search_by_federal_school_code;
-
--- SAMPLE DATA
--- insert into location values("NJ", "Princeton", 31000, "democratic", "summer: 59-85 F; winter: 21-50 F");
--- insert into university values("002627", "Princeton University", 70, TRUE, 56010, 61928, 1505, "computer science", 1, 5321, 600, FALSE, 5.6, "NJ", "Princeton");
-
--- delete from university where name = "Princeton University";
-
--- call search_by_name("Princeton University");
-
--- call search_by_federal_school_code("002627");
-
--- call search_by_campus_size(100, 300);
-
-

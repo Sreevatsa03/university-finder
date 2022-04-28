@@ -19,6 +19,8 @@ call search_universities(0, 75, 0, 60000, 50000, 100000, 1450, 1600, 1, 10, 0, 1
 
 select * from university where name = "Northwestern University";
 
+DELETE FROM watchlisted_university WHERE name = "Columbia University";
+select * from watchlisted_university;
     
 DELIMITER $$
 create trigger update_avg_star_rating
@@ -33,5 +35,18 @@ begin
 end $$
 delimiter ;
 
-call add_to_watchlist("Columbia University", "cool also");
+call add_to_watchlist("Northwestern University", "another great school");
 select * from watchlisted_university;
+
+select r.star_rating, r.description, r.author, r.university, u.name from review as r
+join university as u
+on r.university = u.federal_school_code
+order by university;
+
+
+
+
+
+
+
+
