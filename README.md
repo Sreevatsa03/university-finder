@@ -7,17 +7,17 @@ An application with the functionality to find and filter universities, view and 
 ## Installation Requirements
 
 - pandas
-```
+````
 pip install pandas
-```
+````
 - PyQt5
-```
+````
 pip install PyQt5
-```
+````
 - MySQL Connector
-```
+````
 pip install mysql-connector-python
-```
+````
 
 This application can be installed anywhere.
 
@@ -27,6 +27,6 @@ This application can be installed anywhere.
 Once the application files are downloaded, run the .sql files to create the database and its accompanying procedures, functions, and triggers.
 
 ### Run Application
-```
+````
 python university_finder_ui.py
-```
+````
